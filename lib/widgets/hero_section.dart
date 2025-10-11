@@ -92,7 +92,7 @@ Positioned(
                           speed: const Duration(milliseconds: 100),
                         ),
                         TypewriterAnimatedText(
-                          'Connect with Food Lovers',
+                          'Connect with People',
                           textStyle: TextStyle(
                             fontSize: isMobile ? 20 : 32,
                             color: AppColors.cream,
