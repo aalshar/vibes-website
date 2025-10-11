@@ -159,7 +159,7 @@ class _ContactSectionState extends State<ContactSection> {
                   
                   // Contact form
                   Container(
-                    padding: EdgeInsets.all(isMobile ? 24 : 32),
+                    padding: EdgeInsets.all(isMobile ? 16 : 32),
                     decoration: BoxDecoration(
                       color: AppColors.cream,
                       borderRadius: BorderRadius.circular(24),
@@ -203,7 +203,10 @@ class _ContactSectionState extends State<ContactSection> {
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(color: AppColors.blue, width: 2),
                               ),
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: isMobile ? 12 : 16,
+                                  vertical: isMobile ? 12 : 14,
+                              ),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -320,7 +323,7 @@ class _ContactSectionState extends State<ContactSection> {
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
       child: Container(
-        width: isMobile ? double.infinity : 220,
+        width: isMobile ? (MediaQuery.of(context).size.width - 48) : 220,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: AppColors.cream.withOpacity(0.15),

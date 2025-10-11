@@ -85,36 +85,42 @@ Widget build(BuildContext context) {
                         title: 'Vibes AI',
                         description: 'Chat with our AI assistant to discover restaurants tailored to your preferences.',
                         isMobile: isMobile,
+                        context: context,
                       ),
                       _buildFeatureCard(
                         icon: Icons.emoji_events,
                         title: 'Vibes Best',
                         description: 'Explore top 10 rankings based on authentic ratings and reviews.',
                         isMobile: isMobile,
+                        context: context,
                       ),
                       _buildFeatureCard(
                         icon: Icons.tune,
                         title: 'Smart Filters',
                         description: 'Filter by cuisine, location, features, and price range.',
                         isMobile: isMobile,
+                        context: context,
                       ),
                       _buildFeatureCard(
                         icon: Icons.people,
                         title: 'Social Features',
                         description: 'Connect with friends and share recommendations.',
                         isMobile: isMobile,
+                        context: context,
                       ),
                       _buildFeatureCard(
                         icon: Icons.star_rate,
                         title: 'Real Reviews',
                         description: 'Read genuine reviews from real diners.',
                         isMobile: isMobile,
+                        context: context,
                       ),
                       _buildFeatureCard(
                         icon: Icons.location_on,
                         title: 'Location Based',
                         description: 'Find restaurants near you across Saudi Arabia.',
                         isMobile: isMobile,
+                        context: context,
                       ),
                     ],
                   ),
@@ -134,9 +140,10 @@ Widget _buildFeatureCard({
   required String title,
   required String description,
   required bool isMobile,
+  required BuildContext context,
 }) {
   return Container(
-    width: isMobile ? double.infinity : 340,
+    width: isMobile ? (MediaQuery.of(context).size.width - 48) : 340,
     height: 200, // Add fixed height
     padding: const EdgeInsets.all(24),
     decoration: BoxDecoration(

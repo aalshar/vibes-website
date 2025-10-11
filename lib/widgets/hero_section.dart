@@ -46,15 +46,15 @@ class HeroSection extends StatelessWidget {
           ),
           
           // Brand logo at top left
-          Positioned(
-            top: 30,
-            left: 30,
-            child: Image.asset(
-              'assets/Logo-10.png',
-              height: 60,
-              fit: BoxFit.contain,
-            ),
-          ),
+Positioned(
+  top: isMobile ? 20 : 30,
+  left: isMobile ? 20 : 30,
+  child: Image.asset(
+    'assets/Logo-10.png',
+    height: isMobile ? 40 : 60,
+    fit: BoxFit.contain,
+  ),
+),
           
           // Content
           Center(
@@ -147,7 +147,7 @@ class HeroSection extends StatelessWidget {
             ),
           ),
           
-          // Floating text 1 - Top Right
+        if (!isMobile)
           Positioned(
             top: 150,
             right: 50,
@@ -157,7 +157,7 @@ class HeroSection extends StatelessWidget {
             ),
           ),
           
-          // Floating text 2 - Left Side (Vertical)
+          if (!isMobile)
           Positioned(
             left: 30,
             top: MediaQuery.of(context).size.height * 0.4,
@@ -170,7 +170,7 @@ class HeroSection extends StatelessWidget {
             ),
           ),
           
-          // Floating text 3 - Right Side (Vertical)
+          if (!isMobile)
           Positioned(
             right: 30,
             top: MediaQuery.of(context).size.height * 0.5,

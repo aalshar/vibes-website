@@ -15,30 +15,31 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  final PageController _pageController = PageController();
+  final ScrollController _scrollController = ScrollController();
   double _scrollProgress = 0.0;
 
   @override
   void initState() {
     super.initState();
-    _pageController.addListener(_onPageScroll);
+    _scrollController.addListener(_onScroll);
   }
 
-  void _onPageScroll() {
-    if (_pageController.hasClients) {
-      // Get the current page position (0.0 to 1.0 for first to second page)
-      final page = _pageController.page ?? 0.0;
-      final progress = page.clamp(0.0, 1.0);
-      
-      setState(() {
-        _scrollProgress = progress;
-      });
-    }
+void _onScroll() {
+  if (_scrollController.hasClients) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final currentScroll = _scrollController.offset;
+    // Progress completes within first screen height
+    final progress = (currentScroll / screenHeight).clamp(0.0, 1.0);
+    
+    setState(() {
+      _scrollProgress = progress;
+    });
   }
+}
 
   @override
   void dispose() {
-    _pageController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -47,18 +48,19 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       body: Stack(
         children: [
-          // PageView for snap scrolling
-          PageView(
-            controller: _pageController,
-            scrollDirection: Axis.vertical,
-            children: const [
-              HeroSection(),
-              AboutSection(),
-              FeaturesSection(),
-              ScreenshotsSection(),
-              ContactSection(),
-              FooterSection(),
-            ],
+          // Normal scrolling
+          SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              children: const [
+                HeroSection(),
+                AboutSection(),
+                FeaturesSection(),
+                ScreenshotsSection(),
+                ContactSection(),
+                FooterSection(),
+              ],
+            ),
           ),
           
           // Flying icon overlay

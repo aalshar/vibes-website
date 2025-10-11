@@ -11,10 +11,7 @@ class ScreenshotsSection extends StatefulWidget {
 }
 
 class _ScreenshotsSectionState extends State<ScreenshotsSection> {
-  final PageController _pageController = PageController(
-    viewportFraction: 0.25,
-    initialPage: 4,
-  );
+late PageController _pageController;
   
   int _currentPage = 4;
 
@@ -32,9 +29,18 @@ class _ScreenshotsSectionState extends State<ScreenshotsSection> {
     'Your vibe, your profile',
   ];
 
-  @override
-  void initState() {
-    super.initState();
+@override
+void initState() {
+  super.initState();
+  
+  // Initialize with proper viewport fraction after first frame
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    final isMobile = Responsive.isMobile(context);
+    _pageController = PageController(
+      viewportFraction: isMobile ? 0.85 : 0.25,
+      initialPage: 4,
+    );
+    
     _pageController.addListener(() {
       int next = _pageController.page!.round();
       if (_currentPage != next) {
@@ -44,13 +50,9 @@ class _ScreenshotsSectionState extends State<ScreenshotsSection> {
       }
     });
     
-    // Force initial layout after first frame
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        setState(() {});
-      }
-    });
-  }
+    setState(() {});
+  });
+}
 
   @override
   void dispose() {
@@ -132,13 +134,13 @@ child: Text(
           value = (1 - (value.abs() * 0.6)).clamp(0.5, 1.0);
         }
         
-        return Center(
-          child: SizedBox(
-            height: Curves.easeOut.transform(value) * (isMobile ? 550 : 650),
-            width: Curves.easeOut.transform(value) * (isMobile ? 250 : 380),
-            child: child,
-          ),
-        );
+return Center(
+  child: SizedBox(
+    height: Curves.easeOut.transform(value) * (isMobile ? 500 : 650),
+    width: Curves.easeOut.transform(value) * (isMobile ? 280 : 380),
+    child: child,
+  ),
+);
       },
       child: GestureDetector(
         onTap: () {

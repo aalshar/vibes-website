@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import '../constants/colors.dart';
 import '../utils/responsive.dart';
 import '../widgets/animated_background.dart';
@@ -68,18 +69,21 @@ class AboutSection extends StatelessWidget {
                             title: 'Discover',
                             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                             isMobile: isMobile,
+                            context: context,
                           ),
                           _buildInfoCard(
                             icon: Icons.filter_list,
                             title: 'Filter',
                             description: 'Ut enim ad minim veniam, quis nostrud exercitation.',
                             isMobile: isMobile,
+                            context: context,
                           ),
                           _buildInfoCard(
                             icon: Icons.star,
                             title: 'Experience',
                             description: 'Duis aute irure dolor in reprehenderit in voluptate.',
                             isMobile: isMobile,
+                            context: context,
                           ),
                         ],
                       ),
@@ -94,14 +98,15 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoCard({
-    required IconData icon,
-    required String title,
-    required String description,
-    required bool isMobile,
-  }) {
-    return Container(
-      width: isMobile ? double.infinity : 320, // Reduced from 350
+Widget _buildInfoCard({
+  required IconData icon,
+  required String title,
+  required String description,
+  required bool isMobile,
+  required BuildContext context,
+}) {
+  return Container(
+    width: isMobile ? (MediaQuery.of(context).size.width - 48) : 320,
       padding: const EdgeInsets.all(24), // Reduced from 32
       decoration: BoxDecoration(
         color: Colors.black,
