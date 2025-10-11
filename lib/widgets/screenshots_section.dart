@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../utils/responsive.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../widgets/animated_background.dart';
 
 class ScreenshotsSection extends StatefulWidget {
   const ScreenshotsSection({Key? key}) : super(key: key);
@@ -63,94 +64,106 @@ class _ScreenshotsSectionState extends State<ScreenshotsSection> {
     return Container(
       width: double.infinity,
       height: screenHeight,
-      color: AppColors.black,
-      child: Column(
+      child: Stack(
         children: [
-          Padding(
-            padding: EdgeInsets.only(
-              top: isMobile ? 40 : 50,
-              left: isMobile ? 24 : 80,
-              right: isMobile ? 24 : 80,
-              bottom: isMobile ? 20 : 20,
-            ),
-            child: Column(
-              children: [
-                Text(
-                  'See It In Action',
-                  style: TextStyle(
-                    fontSize: isMobile ? 28 : 48,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.cream,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: isMobile ? 10 : 12),
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: Text(
-                    _screenshotDescriptions[_currentPage],
-                    key: ValueKey<int>(_currentPage),
-                    style: GoogleFonts.lilitaOne(
-                      fontSize: isMobile ? 15 : 20,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.cream.withOpacity(0.7),
-                      letterSpacing: 0.5,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
+          // Animated dark cloudy background (same as Hero, About, Features)
+          Positioned.fill(
+            child: const AnimatedBackground(
+              backgroundColor: Colors.black,
+              isDark: true,
             ),
           ),
           
-          // Carousel with proper height
-          Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return Stack(
+          // Content
+          Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: isMobile ? 40 : 50,
+                  left: isMobile ? 24 : 80,
+                  right: isMobile ? 24 : 80,
+                  bottom: isMobile ? 20 : 20,
+                ),
+                child: Column(
                   children: [
-                    PageView.builder(
-                      controller: _pageController,
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return _buildCarouselItem(
-                          index, 
-                          isMobile, 
-                          constraints.maxHeight,
-                        );
-                      },
+                    Text(
+                      'See It In Action',
+                      style: TextStyle(
+                        fontSize: isMobile ? 28 : 48,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.cream,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    
-                    // Page indicators (dots)
-                    Positioned(
-                      bottom: isMobile ? 30 : 20,
-                      left: 0,
-                      right: 0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(10, (index) {
-                          return AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            margin: const EdgeInsets.symmetric(horizontal: 4),
-                            width: _currentPage == index ? 24 : 8,
-                            height: 8,
-                            decoration: BoxDecoration(
-                              color: _currentPage == index
-                                  ? AppColors.cream
-                                  : AppColors.cream.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          );
-                        }),
+                    SizedBox(height: isMobile ? 10 : 12),
+                    AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      child: Text(
+                        _screenshotDescriptions[_currentPage],
+                        key: ValueKey<int>(_currentPage),
+                        style: GoogleFonts.lilitaOne(
+                          fontSize: isMobile ? 15 : 20,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.cream.withOpacity(0.7),
+                          letterSpacing: 0.5,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ],
-                );
-              },
-            ),
+                ),
+              ),
+              
+              // Carousel with proper height
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Stack(
+                      children: [
+                        PageView.builder(
+                          controller: _pageController,
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            return _buildCarouselItem(
+                              index, 
+                              isMobile, 
+                              constraints.maxHeight,
+                            );
+                          },
+                        ),
+                        
+                        // Page indicators (dots)
+                        Positioned(
+                          bottom: isMobile ? 30 : 20,
+                          left: 0,
+                          right: 0,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(10, (index) {
+                              return AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
+                                margin: const EdgeInsets.symmetric(horizontal: 4),
+                                width: _currentPage == index ? 24 : 8,
+                                height: 8,
+                                decoration: BoxDecoration(
+                                  color: _currentPage == index
+                                      ? AppColors.cream
+                                      : AppColors.cream.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              );
+                            }),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              
+              SizedBox(height: isMobile ? 50 : 50),
+            ],
           ),
-          
-          SizedBox(height: isMobile ? 50 : 50),
         ],
       ),
     );

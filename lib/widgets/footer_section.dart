@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../constants/colors.dart';
 import '../utils/responsive.dart';
+import '../widgets/animated_background.dart';
 
 class FooterSection extends StatelessWidget {
   const FooterSection({Key? key}) : super(key: key);
@@ -19,115 +20,145 @@ class FooterSection extends StatelessWidget {
     
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 24 : 80,
-        vertical: 60,
-      ),
-      color: const Color(0xFF0a0a0a),
-      child: Column(
+      child: Stack(
         children: [
-          // Logo (same as Hero section)
-          Image.asset(
-            'assets/Logo-10.png',
-            height: 70,
-            fit: BoxFit.contain,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Discover. Experience. Share.',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.white.withOpacity(0.6),
+          // Animated dark cloudy background
+          Positioned.fill(
+            child: const AnimatedBackground(
+              backgroundColor: Colors.black,
+              isDark: true,
             ),
           ),
-          const SizedBox(height: 40),
           
-          // Social media icons
-          Wrap(
-            spacing: 20,
-            runSpacing: 20,
-            alignment: WrapAlignment.center,
-            children: [
-              _buildSocialButton(
-                icon: Icons.language,
-                label: 'Website',
-                onPressed: () => _launchURL('https://example.com'),
-              ),
-              _buildSocialButton(
-                icon: Icons.email,
-                label: 'Email',
-                onPressed: () => _launchURL('mailto:info@vibesappsa.com'),
-              ),
-              _buildSocialButton(
-                icon: Icons.phone,
-                label: 'Instagram',
-                onPressed: () => _launchURL('https://instagram.com/yourhandle'),
-              ),
-              _buildSocialButton(
-                icon: Icons.facebook,
-                label: 'Twitter',
-                onPressed: () => _launchURL('https://twitter.com/yourhandle'),
-              ),
-            ],
-          ),
-          
-          const SizedBox(height: 40),
-          
-          // Divider
-          Container(
-            height: 1,
-            width: double.infinity,
-            color: Colors.white.withOpacity(0.1),
-          ),
-          
-          const SizedBox(height: 30),
-          
-          // Copyright and links
-          Wrap(
-            spacing: 30,
-            runSpacing: 15,
-            alignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              Text(
-                '© 2025 Vibes. All rights reserved.',
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.5),
-                  fontSize: 14,
+          // Subtle gradient overlay for depth
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    AppColors.blue.withOpacity(0.1),
+                  ],
                 ),
               ),
-              _buildFooterLink('Privacy Policy', () {}),
-              _buildFooterLink('Terms of Service', () {}),
-              _buildFooterLink('Contact Us', () {}),
-            ],
+            ),
           ),
           
-          const SizedBox(height: 20),
-          
-          // Made with love
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Made with ',
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.5),
-                  fontSize: 12,
+          // Content
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 24 : 80,
+              vertical: 60,
+            ),
+            child: Column(
+              children: [
+                // Logo (same as Hero section)
+                Image.asset(
+                  'assets/Logo-10.png',
+                  height: 70,
+                  fit: BoxFit.contain,
                 ),
-              ),
-              const Icon(
-                Icons.favorite,
-                color: Colors.red,
-                size: 16,
-              ),
-              Text(
-                ' in Saudi Arabia',
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.5),
-                  fontSize: 12,
+                const SizedBox(height: 16),
+                Text(
+                  'Discover. Experience. Share.',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white.withOpacity(0.6),
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 40),
+                
+                // Social media icons
+                Wrap(
+                  spacing: 20,
+                  runSpacing: 20,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    _buildSocialButton(
+                      icon: Icons.language,
+                      label: 'Website',
+                      onPressed: () => _launchURL('https://example.com'),
+                    ),
+                    _buildSocialButton(
+                      icon: Icons.email,
+                      label: 'Email',
+                      onPressed: () => _launchURL('mailto:info@vibesappsa.com'),
+                    ),
+                    _buildSocialButton(
+                      icon: Icons.phone,
+                      label: 'Instagram',
+                      onPressed: () => _launchURL('https://instagram.com/yourhandle'),
+                    ),
+                    _buildSocialButton(
+                      icon: Icons.facebook,
+                      label: 'Twitter',
+                      onPressed: () => _launchURL('https://twitter.com/yourhandle'),
+                    ),
+                  ],
+                ),
+                
+                const SizedBox(height: 40),
+                
+                // Divider
+                Container(
+                  height: 1,
+                  width: double.infinity,
+                  color: Colors.white.withOpacity(0.1),
+                ),
+                
+                const SizedBox(height: 30),
+                
+                // Copyright and links
+                Wrap(
+                  spacing: 30,
+                  runSpacing: 15,
+                  alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text(
+                      '© 2025 Vibes. All rights reserved.',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontSize: 14,
+                      ),
+                    ),
+                    _buildFooterLink('Privacy Policy', () {}),
+                    _buildFooterLink('Terms of Service', () {}),
+                    _buildFooterLink('Contact Us', () {}),
+                  ],
+                ),
+                
+                const SizedBox(height: 20),
+                
+                // Made with love
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Made with ',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontSize: 12,
+                      ),
+                    ),
+                    const Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                      size: 16,
+                    ),
+                    Text(
+                      ' in Saudi Arabia',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

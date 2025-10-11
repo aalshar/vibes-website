@@ -17,11 +17,11 @@ class AboutSection extends StatelessWidget {
       height: screenHeight,
       child: Stack(
         children: [
-          // Animated light background
+          // Animated dark cloudy background (same as Hero)
           Positioned.fill(
             child: const AnimatedBackground(
               backgroundColor: Colors.black,
-              isDark: false,
+              isDark: true,
             ),
           ),
           
