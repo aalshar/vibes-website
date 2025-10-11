@@ -39,13 +39,19 @@ Widget build(BuildContext context) {
   // Calculate position based on scroll
   final progress = widget.scrollProgress.clamp(0.0, 1.0);
   
-  // Start position: center of first screen (HIGHER UP)
-  // End position: top-right of second screen
-  final startX = widget.screenSize.width / 2 - 60;
-  final startY = widget.screenSize.height * 0.15; // Higher position
+  final isMobile = widget.screenSize.width < 650;
+  
 
-  final endX = widget.screenSize.width - 150;
-  final endY = 100.0;
+final startX = widget.screenSize.width / 2 - 60;
+final startY = isMobile 
+  ? widget.screenSize.height * 0.15
+  : widget.screenSize.height * 0.20;
+
+  // End position: top-right
+  final endX = isMobile 
+    ? widget.screenSize.width - 80
+    : widget.screenSize.width - 150;
+  final endY = isMobile ? 120.0 : 100.0;
   
   // Smooth curve animation
   final curvedProgress = Curves.easeInOutCubic.transform(progress);

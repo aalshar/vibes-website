@@ -12,16 +12,18 @@ class HeroSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
     
-    return Container(
-      width: double.infinity,
-      height: Responsive.height(context),
-      child: Stack(
-        children: [
-          // Animated dark cloudy background
-          const AnimatedBackground(
-            backgroundColor: AppColors.black,
-            isDark: true,
-          ),
+return Container(
+  width: double.infinity,
+  height: Responsive.height(context),
+  child: Stack(
+children: [
+  // Animated dark cloudy background
+  Positioned.fill(
+    child: const AnimatedBackground(
+      backgroundColor: AppColors.black,
+      isDark: true,
+    ),
+  ),
           
           // Subtle bottom light effect
           Positioned(

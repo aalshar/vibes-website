@@ -9,11 +9,11 @@ class FeaturesSection extends StatelessWidget {
 Widget build(BuildContext context) {
   final isMobile = Responsive.isMobile(context);
   
-  return Stack(
-    children: [
-      Container(
-        width: double.infinity,
-        height: Responsive.height(context),
+return Stack(
+  children: [
+    Container(
+      width: double.infinity,
+      height: Responsive.height(context),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topRight,

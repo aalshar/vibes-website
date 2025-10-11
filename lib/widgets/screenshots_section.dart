@@ -64,10 +64,10 @@ void initState() {
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
     
-    return Container(
-      width: double.infinity,
-      height: Responsive.height(context),
-      color: AppColors.black,
+return Container(
+  width: double.infinity,
+  height: Responsive.height(context),
+  color: AppColors.black,
       child: Column(
         children: [
           Padding(

@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+class PositionedBackground extends StatelessWidget {
+  final AnimatedBackground background;
+  
+  const PositionedBackground({
+    Key? key,
+    required this.background,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned.fill(
+      child: background,
+    );
+  }
+}
+
 class AnimatedBackground extends StatefulWidget {
   final Color backgroundColor;
   final bool isDark;
@@ -34,17 +50,17 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return CustomPaint(
-          painter: widget.isDark
-              ? CloudyBackgroundPainter(_controller.value)
-              : LightBackgroundPainter(_controller.value),
-          child: Container(
-            decoration: BoxDecoration(
+@override
+Widget build(BuildContext context) {
+  return AnimatedBuilder(
+    animation: _controller,
+    builder: (context, child) {
+      return CustomPaint(
+        painter: widget.isDark
+            ? CloudyBackgroundPainter(_controller.value)
+            : LightBackgroundPainter(_controller.value),
+        child: Container(
+          decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -60,6 +76,7 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
               ),
             ),
           ),
+        
         );
       },
     );

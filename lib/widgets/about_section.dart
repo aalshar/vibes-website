@@ -11,16 +11,18 @@ class AboutSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
     
-    return Container(
-      width: double.infinity,
-      height: Responsive.height(context), // Fixed height
-      child: Stack(
-        children: [
-          // Animated light background
-          const AnimatedBackground(
-            backgroundColor: Colors.black,
-            isDark: false,
-          ),
+return Container(
+  width: double.infinity,
+  height: Responsive.height(context),
+  child: Stack(
+children: [
+  // Animated light background
+  Positioned.fill(
+    child: const AnimatedBackground(
+      backgroundColor: Colors.black,
+      isDark: false,
+    ),
+  ),
           
           // Content - Made scrollable
           SingleChildScrollView(
