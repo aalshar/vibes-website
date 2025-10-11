@@ -41,11 +41,10 @@ Widget build(BuildContext context) {
   
   final isMobile = widget.screenSize.width < 650;
   
-
-final startX = widget.screenSize.width / 2 - 60;
-final startY = isMobile 
-  ? widget.screenSize.height * 0.15
-  : widget.screenSize.height * 0.20;
+  final startX = widget.screenSize.width / 2 - 60;
+  final startY = isMobile 
+    ? widget.screenSize.height * 0.12  // Moved up from 0.15 to 0.12
+    : widget.screenSize.height * 0.20;
 
   // End position: top-right
   final endX = isMobile 
@@ -67,9 +66,6 @@ final startY = isMobile
     size = 180 - (80 * ((progress - 0.5) / 0.5));
   }
   
-  // NO rotation - removed this line:
-  // final rotation = progress * math.pi * 0.2;
-  
   return AnimatedBuilder(
     animation: _floatController,
     builder: (context, child) {
@@ -78,7 +74,6 @@ final startY = isMobile
       return Positioned(
         left: currentX,
         top: currentY + float,
-        // Removed Transform.rotate completely
         child: Container(
           width: size,
           height: size,

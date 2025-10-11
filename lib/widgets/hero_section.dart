@@ -12,18 +12,18 @@ class HeroSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
     
-return Container(
-  width: double.infinity,
-  height: Responsive.height(context),
-  child: Stack(
-children: [
-  // Animated dark cloudy background
-  Positioned.fill(
-    child: const AnimatedBackground(
-      backgroundColor: AppColors.black,
-      isDark: true,
-    ),
-  ),
+    return Container(
+      width: double.infinity,
+      height: Responsive.height(context),
+      child: Stack(
+        children: [
+          // Animated dark cloudy background
+          Positioned.fill(
+            child: const AnimatedBackground(
+              backgroundColor: AppColors.black,
+              isDark: true,
+            ),
+          ),
           
           // Subtle bottom light effect
           Positioned(
@@ -48,15 +48,15 @@ children: [
           ),
           
           // Brand logo at top left
-Positioned(
-  top: isMobile ? 20 : 30,
-  left: isMobile ? 20 : 30,
-  child: Image.asset(
-    'assets/Logo-10.png',
-    height: isMobile ? 40 : 60,
-    fit: BoxFit.contain,
-  ),
-),
+          Positioned(
+            top: isMobile ? 20 : 30,
+            left: isMobile ? 20 : 30,
+            child: Image.asset(
+              'assets/Logo-10.png',
+              height: isMobile ? 40 : 60,
+              fit: BoxFit.contain,
+            ),
+          ),
           
           // Content
           Center(
@@ -70,37 +70,29 @@ Positioned(
                   // Animated tagline
                   SizedBox(
                     height: isMobile ? 60 : 80,
-                    child: AnimatedTextKit(
-                      repeatForever: true,
-                      animatedTexts: [
-                        TypewriterAnimatedText(
-                          'Discover Amazing Restaurants',
-                          textStyle: TextStyle(
-                            fontSize: isMobile ? 20 : 32,
-                            color: AppColors.cream,
-                            fontWeight: FontWeight.w300,
+                    child: DefaultTextStyle(
+                      style: TextStyle(
+                        fontSize: isMobile ? 20 : 32,
+                        color: AppColors.cream,
+                        fontWeight: FontWeight.w300,
+                      ),
+                      child: AnimatedTextKit(
+                        repeatForever: true,
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                            'Discover Amazing Restaurants',
+                            speed: const Duration(milliseconds: 100),
                           ),
-                          speed: const Duration(milliseconds: 100),
-                        ),
-                        TypewriterAnimatedText(
-                          'Explore Saudi Arabia\'s Cuisine',
-                          textStyle: TextStyle(
-                            fontSize: isMobile ? 20 : 32,
-                            color: AppColors.cream,
-                            fontWeight: FontWeight.w300,
+                          TypewriterAnimatedText(
+                            'Explore Saudi Arabia\'s Cuisine',
+                            speed: const Duration(milliseconds: 100),
                           ),
-                          speed: const Duration(milliseconds: 100),
-                        ),
-                        TypewriterAnimatedText(
-                          'Connect with People',
-                          textStyle: TextStyle(
-                            fontSize: isMobile ? 20 : 32,
-                            color: AppColors.cream,
-                            fontWeight: FontWeight.w300,
+                          TypewriterAnimatedText(
+                            'Connect with People',
+                            speed: const Duration(milliseconds: 100),
                           ),
-                          speed: const Duration(milliseconds: 100),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 50),
@@ -149,19 +141,18 @@ Positioned(
             ),
           ),
           
-        if (!isMobile)
+          // Floating texts - Show on all devices
           Positioned(
-            top: 150,
-            right: 50,
+            top: isMobile ? 120 : 150,
+            right: isMobile ? 20 : 50,
             child: _buildFloatingText(
               'AI Powered',
               isMobile,
             ),
           ),
           
-          if (!isMobile)
           Positioned(
-            left: 30,
+            left: isMobile ? 10 : 30,
             top: MediaQuery.of(context).size.height * 0.4,
             child: RotatedBox(
               quarterTurns: 3,
@@ -172,9 +163,8 @@ Positioned(
             ),
           ),
           
-          if (!isMobile)
           Positioned(
-            right: 30,
+            right: isMobile ? 10 : 30,
             top: MediaQuery.of(context).size.height * 0.5,
             child: RotatedBox(
               quarterTurns: 1,
@@ -217,20 +207,22 @@ Positioned(
   }
   
   Widget _buildFloatingText(String text, bool isMobile) {
-    return AnimatedTextKit(
-      repeatForever: true,
-      pause: const Duration(milliseconds: 2000),
-      animatedTexts: [
-        TypewriterAnimatedText(
-          text,
-          textStyle: TextStyle(
-            fontSize: isMobile ? 14 : 18,
-            color: AppColors.cream.withOpacity(0.6),
-            fontWeight: FontWeight.w400,
+    return DefaultTextStyle(
+      style: TextStyle(
+        fontSize: isMobile ? 12 : 18,
+        color: AppColors.cream.withOpacity(0.6),
+        fontWeight: FontWeight.w400,
+      ),
+      child: AnimatedTextKit(
+        repeatForever: true,
+        pause: const Duration(milliseconds: 2000),
+        animatedTexts: [
+          TypewriterAnimatedText(
+            text,
+            speed: const Duration(milliseconds: 100),
           ),
-          speed: const Duration(milliseconds: 100),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

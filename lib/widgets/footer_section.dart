@@ -26,23 +26,13 @@ class FooterSection extends StatelessWidget {
       color: const Color(0xFF0a0a0a),
       child: Column(
         children: [
-          // Logo and tagline
-          Icon(
-            Icons.restaurant_menu,
-            size: 50,
-            color: AppColors.primary,
+          // Logo (same as Hero section)
+          Image.asset(
+            'assets/Logo-10.png',
+            height: 70,
+            fit: BoxFit.contain,
           ),
           const SizedBox(height: 16),
-          const Text(
-            'VIBES',
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              letterSpacing: 4,
-            ),
-          ),
-          const SizedBox(height: 8),
           Text(
             'Discover. Experience. Share.',
             style: TextStyle(
@@ -66,7 +56,7 @@ class FooterSection extends StatelessWidget {
               _buildSocialButton(
                 icon: Icons.email,
                 label: 'Email',
-                onPressed: () => _launchURL('mailto:your-email@example.com'),
+                onPressed: () => _launchURL('mailto:info@vibesappsa.com'),
               ),
               _buildSocialButton(
                 icon: Icons.phone,
