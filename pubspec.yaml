@@ -33,10 +33,10 @@ flutter:
     - assets/screenshot_3.png
     - assets/screenshot_4.png
     - assets/screenshot_5.png
-    # - assets/screenshot_6.png
+    - assets/screenshot_6.png
     - assets/screenshot_7.png
-    # - assets/screenshot_8.png
-    # - assets/screenshot_9.png
-    # - assets/screenshot_10.png
+    - assets/screenshot_8.png
+    - assets/screenshot_9.png
+    - assets/screenshot_10.png
     
     

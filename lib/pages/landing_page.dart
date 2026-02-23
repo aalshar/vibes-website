@@ -6,6 +6,7 @@ import '../widgets/screenshots_section.dart';
 import '../widgets/contact_section.dart';
 import '../widgets/footer_section.dart';
 import '../widgets/flying_icon.dart';
+import '../widgets/animated_background.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -24,18 +25,16 @@ class _LandingPageState extends State<LandingPage> {
     _scrollController.addListener(_onScroll);
   }
 
-void _onScroll() {
-  if (_scrollController.hasClients) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final currentScroll = _scrollController.offset;
-    // Progress completes within first screen height
-    final progress = (currentScroll / screenHeight).clamp(0.0, 1.0);
-    
-    setState(() {
-      _scrollProgress = progress;
-    });
+  void _onScroll() {
+    if (_scrollController.hasClients) {
+      final screenHeight = MediaQuery.of(context).size.height;
+      final currentScroll = _scrollController.offset;
+      final progress = (currentScroll / screenHeight).clamp(0.0, 1.0);
+      setState(() {
+        _scrollProgress = progress;
+      });
+    }
   }
-}
 
   @override
   void dispose() {
@@ -48,7 +47,15 @@ void _onScroll() {
     return Scaffold(
       body: Stack(
         children: [
-          // Normal scrolling
+          // Fixed background — stays in place while content scrolls
+          Positioned.fill(
+            child: AnimatedBackground(
+              backgroundColor: Colors.black,
+              isDark: true,
+            ),
+          ),
+
+          // Scrollable content on top
           SingleChildScrollView(
             controller: _scrollController,
             child: Column(
@@ -62,7 +69,7 @@ void _onScroll() {
               ],
             ),
           ),
-          
+
           // Flying icon overlay
           FlyingIcon(
             scrollProgress: _scrollProgress,

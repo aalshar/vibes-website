@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import '../constants/colors.dart';
 import '../utils/responsive.dart';
-import '../widgets/animated_background.dart';
 import '../widgets/animated_logo.dart';
 
 class HeroSection extends StatelessWidget {
@@ -15,16 +14,9 @@ class HeroSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: Responsive.height(context),
+      color: Colors.transparent, // transparent so landing page background shows through
       child: Stack(
         children: [
-          // Animated dark cloudy background
-          Positioned.fill(
-            child: const AnimatedBackground(
-              backgroundColor: AppColors.black,
-              isDark: true,
-            ),
-          ),
-          
           // Subtle bottom light effect
           Positioned(
             bottom: 0,
@@ -141,14 +133,11 @@ class HeroSection extends StatelessWidget {
             ),
           ),
           
-          // Floating texts - Show on all devices
+          // Floating texts
           Positioned(
             top: isMobile ? 120 : 150,
             right: isMobile ? 20 : 50,
-            child: _buildFloatingText(
-              'AI Powered',
-              isMobile,
-            ),
+            child: _buildFloatingText('AI Powered', isMobile),
           ),
           
           Positioned(
@@ -156,10 +145,7 @@ class HeroSection extends StatelessWidget {
             top: MediaQuery.of(context).size.height * 0.4,
             child: RotatedBox(
               quarterTurns: 3,
-              child: _buildFloatingText(
-                'Smart Filters',
-                isMobile,
-              ),
+              child: _buildFloatingText('Smart Filters', isMobile),
             ),
           ),
           
@@ -168,10 +154,7 @@ class HeroSection extends StatelessWidget {
             top: MediaQuery.of(context).size.height * 0.5,
             child: RotatedBox(
               quarterTurns: 1,
-              child: _buildFloatingText(
-                'Top Rankings',
-                isMobile,
-              ),
+              child: _buildFloatingText('Top Rankings', isMobile),
             ),
           ),
         ],
